@@ -45,7 +45,7 @@ export default function Header() {
     },
   ];
 
-  const linkStyle = "p-1 font-semibold cursor-pointer hover:border-b-4";
+  const linkStyle = "p-1 font-semibold cursor-pointer hover:border-b-2";
   const dropDownStyle =
     "flex flex-col absolute shadow-lg py-2 px-4 z-10 \
   rounded-b-lg top-0 gap-y-2 bg-white";
