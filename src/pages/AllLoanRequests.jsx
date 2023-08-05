@@ -3,19 +3,14 @@ import React, { useState, useEffect } from "react";
 
 function AllLoanRequests() {
   const [loanRequests, setLoanRequests] = useState([]);
-  const prodLoanBaseUrl = import.meta.env.VITE_PROD_LOAN_BASE_URL;
 
   useEffect(() => {
     async function fetchLoanRequests() {
       try {
-        const response = await axios.get(`${prodLoanBaseUrl}`, {
-          params: {
-            action: "get_all_loan_request",
-          },
-        });
+        const response = await axios.get("/get_all_loan_request");
 
         // Assuming response.data is an array of loan requests
-        // setLoanRequests(response.data);
+        setLoanRequests(response.data);
       } catch (error) {
         console.error("Error fetching loan requests:", error);
       }

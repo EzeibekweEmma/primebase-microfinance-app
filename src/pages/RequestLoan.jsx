@@ -4,29 +4,26 @@ import {
   CalendarDaysIcon,
   CurrencyDollarIcon,
   PaperAirplaneIcon,
-  AtSymbolIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 
 function RequestLoan() {
-  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
   const [repaymentDuration, setRepaymentDuration] = useState("");
-  const prodLoanBaseUrl = import.meta.env.VITE_PROD_LOAN_BASE_URL;
 
   const handleLoanRequest = async (e) => {
     e.preventDefault();
 
     const requestData = {
-      action: "request_for_loan",
-      full_name: email,
+      full_name: fullName,
       loan_amount: loanAmount,
       repayment_duration: repaymentDuration,
     };
 
     try {
-      const response = await axios.post(prodLoanBaseUrl, requestData);
+      await axios.post("/request_for_loan", requestData);
       // Success message goes here
-      console.log(response);
     } catch (error) {
       console.error("Error making loan request:", error);
       //Error message goes here
@@ -46,19 +43,19 @@ function RequestLoan() {
           onSubmit={handleLoanRequest}
           className="border shadow-md rounded-xl py-20 px-8 bg-[#fafafa]"
         >
-          <label htmlFor="email" className="relative block mb-3 font-medium">
-            Email
+          <label htmlFor="fullName" className="relative block mb-3 font-medium">
+            FullName
             <span className="absolute inset-[3.3rem] left-0 flex items-center pl-3">
-              <AtSymbolIcon className="h-5 w-5" />
+              <UserIcon className="h-5 w-5" />
             </span>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="fullName"
               className={inputStyle}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
-              placeholder="Enter Your Email"
+              placeholder="Enter Your Name"
             />
           </label>
 
@@ -71,7 +68,7 @@ function RequestLoan() {
               <CurrencyDollarIcon className="h-5 w-5" />
             </span>
             <input
-              type="number"
+              type="text"
               id="loanAmount"
               className={inputStyle}
               value={loanAmount}
@@ -90,7 +87,7 @@ function RequestLoan() {
               <CalendarDaysIcon className="h-5 w-5" />
             </span>
             <input
-              type="date"
+              type="text"
               id="repaymentDuration"
               className={inputStyle}
               value={repaymentDuration}

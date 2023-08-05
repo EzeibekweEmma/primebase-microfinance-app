@@ -6,18 +6,17 @@ import axios from "axios";
 import React, { useState } from "react";
 
 function RepaymentSchedule() {
-  const [transactionId, setTransactionId] = useState("");
+  const [transaction_Id, setTransaction_Id] = useState("");
   const [repaymentData, setRepaymentData] = useState(null);
-  const prodLoanBaseUrl = import.meta.env.VITE_PROD_LOAN_BASE_URL;
 
   const handleFetchRepayment = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(prodLoanBaseUrl, {
-        action: "get_repayment_schedule",
-        transaction_id: transactionId,
-      });
+      const response = await axios.get(
+        "/get_repayment_schedule",
+        transaction_Id
+      );
 
       setRepaymentData(response.data);
     } catch (error) {
@@ -25,7 +24,7 @@ function RepaymentSchedule() {
       //Error message goes here
     }
   };
-  
+
   return (
     <section className="min-h-[84vh] flex justify-center items-center">
       <section>
@@ -38,7 +37,7 @@ function RepaymentSchedule() {
             className="border shadow-md rounded-xl py-14 px-8 bg-[#fafafa]"
           >
             <label
-              htmlFor="transactionId"
+              htmlFor="transaction_Id"
               className="relative block mb-3 font-medium"
             >
               Transaction ID
@@ -47,11 +46,11 @@ function RepaymentSchedule() {
               </span>
               <input
                 type="text"
-                id="transactionId"
+                id="transaction_Id"
                 className="min-w-full max-w-full rounded-md focus:outline-none font-normal
               placeholder:italic focus:shadow-md py-2 pl-9 pr-3 mt-2"
-                value={transactionId}
-                onChange={(e) => setTransactionId(e.target.value)}
+                value={transaction_Id}
+                onChange={(e) => setTransaction_Id(e.target.value)}
                 required
                 placeholder="Transaction ID"
               />
