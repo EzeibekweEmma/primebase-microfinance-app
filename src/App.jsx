@@ -12,11 +12,16 @@ export default function App() {
         <Route index element={<HeroSection />} />
         <Route path="/request" element={<RequestLoan />} />
         <Route path="/all-loans" element={<AllLoanRequests />} />
-        <Route path="/repayment/:transactionId" element={<RepaymentSchedule/>} />
+        <Route
+          path="/repayment/:transactionId"
+          element={<RepaymentSchedule />}
+        />
         <Route
           path="*"
           element={
-            <h2 className="text-4xl text-center my-5">Page Not Found</h2>
+            <h2 className="text-4xl my-5 min-h-[78vh] flex justify-center items-center">
+              Page Not Found
+            </h2>
           }
         />
       </Route>
