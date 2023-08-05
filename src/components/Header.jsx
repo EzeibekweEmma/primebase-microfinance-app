@@ -6,6 +6,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import Logo from "../assets/logo.png";
 
 export default function Header() {
   const [dropDown, setDropDown] = useState(false);
@@ -94,7 +95,7 @@ export default function Header() {
     <header className="flex justify-center bg-white shadow-md">
       <section className="flex justify-between w-[80vw] items-center py-3">
         <Link to="/" className="font-semibold text-lg">
-          PrimeBase
+          <img src={Logo} height={150} width={150} alt="logo"/>
         </Link>
         {/* Desktop Mode */}
         <div className="sm:block hidden">
