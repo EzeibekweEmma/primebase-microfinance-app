@@ -40,7 +40,7 @@ function AllLoanRequests() {
               >
                 Transaction ID: {loanRequest.transaction_id}
                 <ul className="text-sm ml-5">
-                  <li>Full Name: {loanRequest.full_name}</li>
+                  <li>Email: {loanRequest.email}</li>
                   <li>Loan Amount: {loanRequest.loan_amount}</li>
                 </ul>
               </li>
