@@ -1,0 +1,17 @@
+{
+  "name": "prime-base",
+  "version": "1.0.0",
+  "description": "A Micro Finance Loan Lending Company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EzeIbekwe Emmanuel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.4.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4"
+  }
+}
