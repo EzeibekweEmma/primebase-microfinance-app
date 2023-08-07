@@ -1,6 +1,6 @@
 ### Technical Test
 # PrimeBase Micro Finance Loan Lending Company
-![logo](./src/assets/logo.png)
+![logo](./client/src/assets/logo.png)
 Welcome to the PrimeBase Micro Finance Loan Lending Company project! This project demonstrates a simple web application built with React that interacts with the PrimeBase API to manage loan requests and repayment schedules.
 
 Site Demo: [https://primebase-microfinance-app.vercel.app/](https://primebase-microfinance-app.vercel.app/)
