@@ -3,19 +3,39 @@ import {
   HashtagIcon,
 } from "@heroicons/react/24/outline";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams, useParams } from "react-router-dom";
 
 function RepaymentSchedule() {
-  const [transaction_Id, setTransaction_Id] = useState("");
+  const [transaction_id, setTransaction_Id] = useState("");
   const [repaymentData, setRepaymentData] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // TODO - Get transaction_id from URL
+  // const { transactionId } = useParams();
+  // TODO get repayment schedule from the URL
+  // useEffect(async () => {
+  //   if (transactionId) {
+  //     setSearchParams({ transaction_id: transactionId });
+  //     try {
+  //       const response = await axios.get(
+  //         "/get_repayment_schedule/" + transaction_id
+  //       );
+
+  //       setRepaymentData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching repayment schedule:", error);
+  //       //Error message goes here
+  //     }
+  //   }
+  // }, []);
 
   const handleFetchRepayment = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.get(
-        "/get_repayment_schedule",
-        transaction_Id
+        "/get_repayment_schedule/" + transaction_id
       );
 
       setRepaymentData(response.data);
@@ -25,19 +45,26 @@ function RepaymentSchedule() {
     }
   };
 
+  // Reset values to defaults
+  const resetValues = () => {
+    setSearchParams({});
+    setTransaction_Id("");
+    setRepaymentData(null);
+  };
+
   return (
     <section className="min-h-[84vh] flex justify-center items-center">
       <section>
-        <h2 className="text-2xl font-medium my-5 text-slate-600">
+        <h2 className="text-2xl font-medium m-5 text-slate-600">
           Repayment Schedule
         </h2>
         {!repaymentData ? (
           <form
             onSubmit={handleFetchRepayment}
-            className="border shadow-md rounded-xl py-14 px-8 bg-[#fafafa]"
+            className="border shadow-md rounded-xl py-14 px-8 bg-[#fafafa] m-5"
           >
             <label
-              htmlFor="transaction_Id"
+              htmlFor="transaction_id"
               className="relative block mb-3 font-medium"
             >
               Transaction ID
@@ -46,10 +73,10 @@ function RepaymentSchedule() {
               </span>
               <input
                 type="text"
-                id="transaction_Id"
+                id="transaction_id"
                 className="min-w-full max-w-full rounded-md focus:outline-none font-normal
               placeholder:italic focus:shadow-md py-2 pl-9 pr-3 mt-2"
-                value={transaction_Id}
+                value={transaction_id}
                 onChange={(e) => setTransaction_Id(e.target.value)}
                 required
                 placeholder="Transaction ID"
@@ -60,37 +87,60 @@ function RepaymentSchedule() {
               className="flex justify-center group items-center space-x-2 bg-white
                   mt-10 w-full py-3 transition duration-500 ease-in border
                hover:text-slate-600 hover:bg-dc hover:rounded-full font-medium"
+              onClick={() => setSearchParams({ transaction_id })}
             >
               <ArrowDownOnSquareIcon
                 strokeWidth={2}
                 className="w-5 h-5 transition duration-500 ease-in
-                    group-hover:translate-x-[7.8rem]"
+                    group-hover:translate-x-[8.5rem]"
               />
               <span
                 className="transition duration-500 ease-in
-                  group-hover:-translate-x-9"
+                  group-hover:-translate-x-6"
               >
                 Fetch&nbsp;Transaction
               </span>
             </button>
           </form>
         ) : (
-          <div className="border shadow-sm rounded-xl p-8 bg-[#fafafa] min-w-[45vw] max-w-[80vw]">
-            <pre>{JSON.stringify(repaymentData, null, 2)}</pre>
+          <div className="border shadow-sm rounded-xl p-8 bg-[#fafafa] max-w-[80vw]">
+            {repaymentData ? (
+              <div
+                key={repaymentData.transaction_id}
+                className="text-base py-5 px-10"
+              >
+                Transaction ID:{" "}
+                <span className="bg-slate-200 px-2 py-1 rounded-md">
+                  {repaymentData.transaction_id}
+                </span>
+                <ul className="text-sm ml-5 mt-2">
+                  <li>Full Name: {repaymentData.full_name}</li>
+                  <li>Email: {repaymentData.email}</li>
+                  <li>Loan Amount: {repaymentData.loan_amount}</li>
+                  <li>
+                    Repayment Duration: {repaymentData.repayment_duration}
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <p className="font-semibold text-red-500 text-center mt-2">
+                Transaction_id Not Found
+              </p>
+            )}
             <button
               className="flex justify-center group items-center space-x-2 bg-white
                   mt-10 w-full py-3 transition duration-500 ease-in border
                hover:text-slate-600 hover:bg-dc hover:rounded-full font-medium"
-              onClick={() => setRepaymentData(null)}
+              onClick={() => resetValues()}
             >
               <ArrowDownOnSquareIcon
                 strokeWidth={2}
                 className="w-5 h-5 transition duration-500 ease-in
-                    group-hover:translate-x-[11.8rem]"
+                    group-hover:translate-x-[12rem]"
               />
               <span
                 className="transition duration-500 ease-in
-                  group-hover:-translate-x-9"
+                  group-hover:-translate-x-7"
               >
                 Fetch&nbsp;Another&nbsp;Transaction
               </span>
