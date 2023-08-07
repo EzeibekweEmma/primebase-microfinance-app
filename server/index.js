@@ -91,4 +91,19 @@ app.get("/api/get_all_loan_request", async (req, res) => {
   }
 });
 
+app.get("/api/get_repayment_schedule/:transaction_Id", async (req, res) => {
+  // Connect to MongoDB
+  mongoose.connect(process.env.MONGO_URL);
+  try {
+    const { transaction_Id } = req.params;
+    
+    res.json(await Loan.findOne({ transaction_id: transaction_Id }));
+  } catch (error) {
+    console.error("Unable to get request:", error);
+    res.status(500).json({
+      message: "Unable to get request, Please try again later",
+    });
+  }
+});
+
 app.listen(port, () => console.log(`App is listening on port ${port}!`));
