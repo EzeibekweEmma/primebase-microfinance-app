@@ -35,7 +35,7 @@ export default function Header() {
         {
           id: 6,
           name: "View Repayment Schedule",
-          link: "repayment/:transactionId",
+          link: "repayment",
         },
       ],
     },

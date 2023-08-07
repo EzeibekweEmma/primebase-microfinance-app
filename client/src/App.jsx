@@ -16,6 +16,7 @@ export default function App() {
         <Route index element={<HeroSection />} />
         <Route path="/request" element={<RequestLoan />} />
         <Route path="/all-loans" element={<AllLoanRequests />} />
+        <Route path="/repayment" element={<RepaymentSchedule />} />
         <Route
           path="/repayment/:transactionId"
           element={<RepaymentSchedule />}

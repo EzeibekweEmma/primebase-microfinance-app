@@ -16,7 +16,7 @@ export default function HeroSection() {
           <div className="flex flex-col space-y-2 font-medium text-green-700 underline">
             <Link to="request">Request for Loan</Link>
             <Link to="all-loans">See All Loan Requests</Link>
-            <Link to="repayment/:transactionId">View Repayment Schedule</Link>
+            <Link to="repayment">View Repayment Schedule</Link>
           </div>
         </details>
       </div>
