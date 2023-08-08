@@ -23,19 +23,54 @@ To run the project locally, follow these steps:
    cd primebase-microfinance-app
    ```
 
-3. **Install Dependencies**: Install the project dependencies using npm:
+3. **Install Server Dependencies**: Install the dependencies for the server:
 
    ```bash
-   npm install
+   cd server && npm install
    ```
 
-4. **Run the App**: Start the development server:
+4. **Server Environment Variable**: Create an `.env` file for the server environment variable:
 
    ```bash
-   npm run dev
+   vim .env
+   ```
+- Set up the environment variables by adding the following environment variables to the .env file:
+   ```vim
+    MONGO_URL=mongodb-url
+    CLIENT_URL="http://127.0.0.1:5173"
+   ```
+   **Note:** Edit the values but don't touch the variable names
+
+5. **Install Client Dependencies** Install the dependencies for the client:
+
+   ```bash
+   cd ../client && npm install
    ```
 
-   The app will be accessible at `http://localhost:5173`.
+6. **Client Environment Variable**: Create an `.env` file for the client environment variable:
+
+   ```bash
+   echo "VITE_API_BASE_URL=http://127.0.0.1:4000/api" > .env
+   ```
+   
+---
+
+## Usage
+
+To start the PrimeBase Micro Finance Application locally, follow these steps:
+
+1. Start the server:
+
+   ```bash
+   cd ../server && npm nodemon index.js 
+   ```
+
+2. Start the client:
+
+   ```bash
+   cd ../client && npm run dev
+   ```
+3. Access the application in your browser at `http://localhost:5173`.
 
 ---
 
